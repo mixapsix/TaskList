@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TaskList.Models
 {
-    public class TaskContext: DbContext
+    public class TasksContext: DbContext
     {
-        public TaskContext(DbContextOptions<TaskContext> options): base(options)
+        public TasksContext(DbContextOptions<TasksContext> options): base(options)
         {
 
         }
