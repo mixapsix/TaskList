@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Claims;
 using Serilog;
 using TaskList.Models;
+using TaskList.ViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
@@ -39,7 +40,7 @@ namespace TaskList.Controllers
                 {
                     await Authenticate(loginModel.Login);
 
-                    RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("", "Некоректные имя или пароль");
             }

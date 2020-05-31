@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace TaskList.Models
+namespace TaskList.ViewModels
 {
     public class RegisterModel
     {
-        [Required(ErrorMessage = "Введите Email")]
+        [Required(ErrorMessage = "Введите Логин")]
         public string Login { get; set; }
 
         [DataType(DataType.Password)]
@@ -17,6 +17,7 @@ namespace TaskList.Models
 
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        [Required(ErrorMessage = "Введите Подтверждение пароля")]
         public string ConfirmPassword { get; set; }
     }
 }

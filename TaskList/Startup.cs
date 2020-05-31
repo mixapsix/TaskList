@@ -26,7 +26,7 @@ namespace TaskList
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+
             services.AddDbContext<UsersContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Connection")));
             services.AddDbContext<TasksContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Connection")));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -34,6 +34,7 @@ namespace TaskList
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
             });
+            services.AddControllersWithViews();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, TasksContext tasksContext, UsersContext usersContext)
@@ -51,6 +52,7 @@ namespace TaskList
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

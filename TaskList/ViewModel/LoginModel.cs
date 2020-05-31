@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-
-namespace TaskList.Models
+namespace TaskList.ViewModels
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Введите Email")]
+        [Required(ErrorMessage = "Введите Логин")]
         public string Login { get; set; }
 
         [DataType(DataType.Password)]
