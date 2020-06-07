@@ -16,11 +16,11 @@ namespace TaskList.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UsersContext usersDB;
+        private readonly ApplicationContext applicationDB;
         
-        public AccountController(UsersContext usersContext)
+        public AccountController(ApplicationContext applicationContext)
         {
-            usersDB = usersContext;
+            applicationDB = applicationContext;
         }
         [HttpGet]
         public IActionResult Login()
@@ -34,7 +34,7 @@ namespace TaskList.Controllers
         {
             if(ModelState.IsValid)
             {
-                User user = await usersDB.Users.
+                User user = await applicationDB.Users.
                     FirstOrDefaultAsync(user => user.Login == loginModel.Login && user.Password == loginModel.Password);
                 if(user != null)
                 {
@@ -59,11 +59,11 @@ namespace TaskList.Controllers
         {
             if(ModelState.IsValid)
             {
-                User user = await usersDB.Users.FirstOrDefaultAsync(user => user.Login == registerModel.Login);
+                User user = await applicationDB.Users.FirstOrDefaultAsync(user => user.Login == registerModel.Login);
                 if (user == null)
                 {
-                    usersDB.Add(new User() { Login = registerModel.Login, Password = registerModel.Password });
-                    await usersDB.SaveChangesAsync();
+                    applicationDB.Add(new User() { Login = registerModel.Login, Password = registerModel.Password });
+                    await applicationDB.SaveChangesAsync();
                     await Authenticate(registerModel.Login);
                     return RedirectToAction("Index", "Home");
                 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace TaskList.Migrations.Users
+namespace TaskList.Migrations
 {
-    public partial class AddUser : Migration
+    public partial class AddData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -22,7 +22,7 @@ namespace TaskList.Migrations.Users
                 });
 
             migrationBuilder.CreateTable(
-                name: "Task",
+                name: "Tasks",
                 columns: table => new
                 {
                     TaskID = table.Column<int>(nullable: false)
@@ -33,9 +33,9 @@ namespace TaskList.Migrations.Users
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Task", x => x.TaskID);
+                    table.PrimaryKey("PK_Tasks", x => x.TaskID);
                     table.ForeignKey(
-                        name: "FK_Task_Users_UserID",
+                        name: "FK_Tasks_Users_UserID",
                         column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID",
@@ -48,15 +48,15 @@ namespace TaskList.Migrations.Users
                 values: new object[] { -1, "admin", "admin" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Task_UserID",
-                table: "Task",
+                name: "IX_Tasks_UserID",
+                table: "Tasks",
                 column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Task");
+                name: "Tasks");
 
             migrationBuilder.DropTable(
                 name: "Users");

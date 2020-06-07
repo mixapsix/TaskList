@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TaskList.Models;
 
-namespace TaskList.Migrations.Users
+namespace TaskList.Migrations
 {
-    [DbContext(typeof(UsersContext))]
-    [Migration("20200531100438_AddUser")]
-    partial class AddUser
+    [DbContext(typeof(ApplicationContext))]
+    [Migration("20200607113058_AddData")]
+    partial class AddData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,7 +40,7 @@ namespace TaskList.Migrations.Users
 
                     b.HasIndex("UserID");
 
-                    b.ToTable("Task");
+                    b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("TaskList.Models.User", b =>

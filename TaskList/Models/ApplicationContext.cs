@@ -6,11 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TaskList.Models
 {
-    public class UsersContext : DbContext
+    public class ApplicationContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Task> Tasks { get; set; }
 
-        public UsersContext(DbContextOptions<UsersContext> options) : base (options)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base (options)
         {
 
         }

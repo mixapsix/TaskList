@@ -27,8 +27,7 @@ namespace TaskList
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<UsersContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Connection")));
-            services.AddDbContext<TasksContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Connection")));
+            services.AddDbContext<ApplicationContext>(opt => opt.UseNpgsql(Configuration.GetConnectionString("Connection")));
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => 
                 {
@@ -37,11 +36,10 @@ namespace TaskList
             services.AddControllersWithViews();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, TasksContext tasksContext, UsersContext usersContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext applicationContext)
         {
 
-            tasksContext.Database.Migrate();
-            usersContext.Database.Migrate();
+            applicationContext.Database.Migrate();
 
             if (env.IsDevelopment())
             {
