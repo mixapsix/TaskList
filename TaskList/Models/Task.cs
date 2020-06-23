@@ -12,7 +12,6 @@ namespace TaskList.Models
         public int TaskID { get; set; }
         public string Name { get; set; }
         public string Discription { get; set; }
-        [ForeignKey("User")]
         public int UserID { get; set; }
         public User User { get; set; }
     }

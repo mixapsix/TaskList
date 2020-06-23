@@ -25,8 +25,7 @@ namespace TaskList.Migrations
                 name: "Tasks",
                 columns: table => new
                 {
-                    TaskID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TaskID = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Discription = table.Column<string>(nullable: true),
                     UserID = table.Column<int>(nullable: false)
@@ -35,8 +34,8 @@ namespace TaskList.Migrations
                 {
                     table.PrimaryKey("PK_Tasks", x => x.TaskID);
                     table.ForeignKey(
-                        name: "FK_Tasks_Users_UserID",
-                        column: x => x.UserID,
+                        name: "FK_Tasks_Users_TaskID",
+                        column: x => x.TaskID,
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
@@ -46,11 +45,6 @@ namespace TaskList.Migrations
                 table: "Users",
                 columns: new[] { "UserID", "Login", "Password" },
                 values: new object[] { -1, "admin", "admin" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Tasks_UserID",
-                table: "Tasks",
-                column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

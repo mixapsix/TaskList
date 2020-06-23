@@ -21,9 +21,7 @@ namespace TaskList.Migrations
             modelBuilder.Entity("TaskList.Models.Task", b =>
                 {
                     b.Property<int>("TaskID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("integer");
 
                     b.Property<string>("Discription")
                         .HasColumnType("text");
@@ -35,8 +33,6 @@ namespace TaskList.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("TaskID");
-
-                    b.HasIndex("UserID");
 
                     b.ToTable("Tasks");
                 });
@@ -71,7 +67,7 @@ namespace TaskList.Migrations
                 {
                     b.HasOne("TaskList.Models.User", "User")
                         .WithMany("Tasks")
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("TaskID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
