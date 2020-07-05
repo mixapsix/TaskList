@@ -51,6 +51,9 @@ namespace TaskList
                 app.UseHsts();
             }
 
+            applicationContext.Tasks.Add(new Models.Task() { Discription = "Test", Name = "Test", UserID = -1 });
+            applicationContext.SaveChanges();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

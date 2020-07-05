@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace TaskList.Models
 {
@@ -13,14 +14,13 @@ namespace TaskList.Models
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base (options)
         {
-
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Task>().HasOne(p => p.User).WithMany(t => t.Tasks).HasForeignKey(p => p.UserID);
-            modelBuilder.Entity<User>().HasMany(p => p.Tasks).WithOne(u => u.User).HasForeignKey(p => p.TaskID);
-            modelBuilder.Entity<User>().HasData(new User { Login = "admin", Password = "admin", UserID = -1, Tasks = null });
+            modelBuilder.Entity<Task>().HasOne(p => p.User).WithMany(u => u.Tasks).HasForeignKey(p => p.UserID);
+            modelBuilder.Entity<User>().HasData(new User { Login = "admin", Password = "admin", UserID = -1, Tasks = new List<Task>() });
         }
     }
 }

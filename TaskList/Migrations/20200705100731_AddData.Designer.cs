@@ -9,7 +9,7 @@ using TaskList.Models;
 namespace TaskList.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20200621113130_AddData")]
+    [Migration("20200705100731_AddData")]
     partial class AddData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,9 @@ namespace TaskList.Migrations
             modelBuilder.Entity("TaskList.Models.Task", b =>
                 {
                     b.Property<int>("TaskID")
-                        .HasColumnType("integer");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Discription")
                         .HasColumnType("text");
@@ -35,6 +37,8 @@ namespace TaskList.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("TaskID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Tasks");
                 });
@@ -69,7 +73,7 @@ namespace TaskList.Migrations
                 {
                     b.HasOne("TaskList.Models.User", "User")
                         .WithMany("Tasks")
-                        .HasForeignKey("TaskID")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

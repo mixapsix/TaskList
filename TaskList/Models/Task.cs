@@ -9,6 +9,7 @@ namespace TaskList.Models
 {
     public class Task
     {
+        [Key]
         public int TaskID { get; set; }
         public string Name { get; set; }
         public string Discription { get; set; }
